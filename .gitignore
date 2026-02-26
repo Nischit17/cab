@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+*.egg
+venv/
+env/
+.env
+
+# SQLite (no longer used)
+*.db
+
+# Backups & migration scripts
+cab_sqlite_backup.py
+migrate_to_postgres.py
+replace_confirms.py
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Debug scripts
+debug_grades.py
+update_students.py

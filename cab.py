@@ -8847,7 +8847,17 @@ def pg_classify_students(id, step):
 
 
 # Initialize database tables on startup (works under both gunicorn and direct run)
-init_db()
+try:
+    init_db()
+except Exception as e:
+    print(f"WARNING: Could not initialize database on startup: {e}")
+    print("Database will be initialized on first request.")
+    
+    @app.before_request
+    def _init_db_on_first_request():
+        init_db()
+        # Remove this hook after first successful init
+        app.before_request_funcs[None].remove(_init_db_on_first_request)
 
 if __name__ == '__main__':
     PORT = int(os.environ.get('PORT', 5000))

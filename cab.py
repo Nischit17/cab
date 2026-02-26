@@ -1556,7 +1556,7 @@ def ug_ise_schemes():
         
         # Count unique students and sections across all semesters in this scheme
         if sem_ids:
-            placeholders = ','.join(['?' for _ in sem_ids])
+            placeholders = ','.join(['%s' for _ in sem_ids])
             total_students = db.execute(f'SELECT COUNT(DISTINCT st.usn) FROM students st JOIN sections sec ON st.section_id = sec.id WHERE sec.semester_id IN ({placeholders})', sem_ids).fetchone()[0]
             total_sections = db.execute(f'SELECT COUNT(DISTINCT sec.name) FROM sections sec WHERE sec.semester_id IN ({placeholders})', sem_ids).fetchone()[0]
         
